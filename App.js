@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Alert, Text, Keyboard, View, FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Header from './components/header';
 import List from './components/listing';
 import Form from './components/form';
@@ -16,18 +16,25 @@ export default function App() {
     setList((previous)=>previous.filter((item) => item.key !== id))
   }
   const add_item = (val)=>{
-    const newItem = {...list, name: val, key: "" + Date.now() }
-     setList([...list,newItem])
+    if (/[a-zA-Z]+/.test(val)){
+      const newItem = {...list, name: val, key: "" + Date.now() }
+      setList([newItem,...list,])
+    }else{
+      Alert.alert('Sorry Gidi Invalid input','please write something down',
+      [{text:'Awele',onPress:()=>console.log('it has gone')}])
+    }
   }
 
   return (
+    <TouchableWithoutFeedback
+    onPress={()=>Keyboard.dismiss()}
+    >
+
     <View style={styles.container}>
-      {/* header */}
       <Header />
       <View style={styles.content}>
         <Form add_item={add_item}/>
         <View style={styles.list}>
-          {/* todo list */}
           <FlatList 
           keyExtractor={(item)=>item.key}
           data={list}
@@ -37,6 +44,7 @@ export default function App() {
         </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -46,9 +54,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   content:{
+    flex:1,
     padding:40,
   },
   list:{
+    flex:1,
     marginTop:30
   }
 });

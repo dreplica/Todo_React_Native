@@ -12,7 +12,7 @@ export default function Header() {
 const styles = {
   header:{
     height:80,
-    paddingTop:25,
+    paddingTop:30,
     paddingBottom:10,
     justifyContent:'center',
     alignItem:"flex-start",

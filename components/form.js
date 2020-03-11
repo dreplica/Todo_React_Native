@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     form:{
-        paddingVertical:10,
+        paddingVertical:5,
+        paddingHorizontal:10,
         marginBottom:5,
         flex:3,
         borderBottomWidth:2,
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     },
     button:{
         flex:1,
-        backgroundColor:'grey',
+        backgroundColor:'darkcyan',
         padding:10
     }
 })
